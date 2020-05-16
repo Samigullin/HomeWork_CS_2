@@ -21,7 +21,7 @@
                         <RowDefinition Height="36"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <DataGrid x:Name="dgEmloyeeList" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True" Margin="10,6,10.4,10" AutoGenerateColumns="false"  Grid.Row="1">
+                    <DataGrid x:Name="dgEmloyeeList" SelectionUnit="Cell"  RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True" Margin="10,6,10.4,10" AutoGenerateColumns="false"  Grid.Row="1">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Имя сотрудника" Binding="{Binding Name}" Width="*" />
                             <DataGridTextColumn Header="Фамилия сотрудника" Binding="{Binding SName}" Width="*" />
