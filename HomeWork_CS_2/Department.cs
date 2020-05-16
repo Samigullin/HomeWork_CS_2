@@ -17,15 +17,6 @@ namespace HomeWork_CS_2
         /// </summary>
         public string DepName { get; set; }
 
-        public Department()
-        {
-            
-        }
-
-        /// <summary>
-        /// Конструктор
-        /// </summary>
-        /// <param name="_name"></param>
         public Department(string _name)
         {
             DepName = _name;
@@ -48,6 +39,11 @@ namespace HomeWork_CS_2
         public int CompareTo(object obj)
         {
             return String.Compare(this.DepName, (obj as Department)?.DepName);
+        }
+
+        public Department()
+        {
+
         }
     }
 }

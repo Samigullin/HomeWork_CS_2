@@ -27,14 +27,20 @@ namespace HomeWork_CS_2
     public partial class MainWindow : Window
     {
         //создаем и заполняем список отделов:
-        ObservableCollection<Department> Departments = new ObservableCollection<Department>()
+        ObservableCollection<string> Departments = new ObservableCollection<string>()
         {
-            new Department("Финанасовый отдел"),
-            new Department("Отдел маркетинга"),
-            new Department("Отдел закупок"),
-            new Department("Коммерческий отдел"),
-            new Department("Отдел персонала"),
-            new Department("Юридический отдел"),
+            "Финанасовый отдел",
+            "Отдел маркетинга",
+            "Отдел закупок",
+            "Коммерческий отдел",
+            "Отдел персонала",
+            "Юридический отдел"
+            //new Department("Финанасовый отдел"),
+            //new Department("Отдел маркетинга"),
+            //new Department("Отдел закупок"),
+            //new Department("Коммерческий отдел"),
+            //new Department("Отдел персонала"),
+            //new Department("Юридический отдел"),
         };
 
         //создаем и заполняем список сотрудников
@@ -47,8 +53,8 @@ namespace HomeWork_CS_2
             LoadFromXML("..\\..\\Employee.xml");
             cbAddDepartment.SelectedIndex = 0;
             //привязываем источники
-            dgEmloyeeList.ItemsSource = Employees;
-            cbAddDepartment.ItemsSource = Departments;                     
+            cbAddDepartment.ItemsSource = Departments;
+            dgEmloyeeList.ItemsSource = Employees;                           
             dataGridComboBox.ItemsSource = Departments;
         }
 
@@ -108,7 +114,7 @@ namespace HomeWork_CS_2
             else
             {
                 MessageBox.Show($"Отдел {tbAddNewDepartment.Text} добавлен.");
-                Departments.Add(new Department(tbAddNewDepartment.Text));
+                //Departments.Add(new Department(tbAddNewDepartment.Text));
                 tbAddNewDepartment.Foreground = Brushes.Gray;
                 tbAddNewDepartment.Text = "Название отдела";
             }
