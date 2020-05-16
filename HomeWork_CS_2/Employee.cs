@@ -10,7 +10,7 @@ namespace HomeWork_CS_2
     /// <summary>
     /// Класс сотрудника
     /// </summary>
-    public class Employee
+    public class Employee 
     {
         /// <summary>
         /// Имя сотрудника
@@ -32,8 +32,8 @@ namespace HomeWork_CS_2
         /// </summary>
         public string GetDepName 
         { 
-            get { return EmployeeDep.DepName; }
-            set { EmployeeDep.DepName = value; } 
+            get { return EmployeeDep?.DepName; }
+            set { EmployeeDep = new Department(value); } 
         }
 
     }

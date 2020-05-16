@@ -90,7 +90,7 @@ namespace HomeWork_CS_2
                 {
                     Name = tbAddName.Text,
                     SName = tbAddSName.Text,
-                    EmployeeDep = (Department)cbAddDepartment.SelectedItem
+                    GetDepName = cbAddDepartment.SelectedItem.ToString()
                 });
 
                 MessageBox.Show($"Сотрудник {tbAddName.Text} {tbAddSName.Text} добавлен в {cbAddDepartment.SelectedItem}.");
@@ -100,7 +100,6 @@ namespace HomeWork_CS_2
                 tbAddName.Text = "Имя";
                 tbAddSName.Text = "Фамилия";
                 cbAddDepartment.SelectedIndex = 0;
-                dgEmloyeeList.ItemsSource = Employees;
             }
         }
 
@@ -114,7 +113,7 @@ namespace HomeWork_CS_2
             else
             {
                 MessageBox.Show($"Отдел {tbAddNewDepartment.Text} добавлен.");
-                //Departments.Add(new Department(tbAddNewDepartment.Text));
+                Departments.Add(tbAddNewDepartment.Text);
                 tbAddNewDepartment.Foreground = Brushes.Gray;
                 tbAddNewDepartment.Text = "Название отдела";
             }
