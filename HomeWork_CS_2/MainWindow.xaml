@@ -39,7 +39,6 @@
                     </Grid.RowDefinitions>
 
                     <DataGrid x:Name="dgEmloyeeList" 
-                              SelectionUnit="Cell" 
                               IsReadOnly="True" 
                               Margin="5" 
                               AutoGenerateColumns="false"  
@@ -55,11 +54,11 @@
                             <DataGridTextColumn Header="Фамилия сотрудника" 
                                                 Binding="{Binding SName}" 
                                                 Width="*" />
-                            
+
                             <DataGridComboBoxColumn x:Name="dataGridComboBox" 
                                                     Header="Отдел сотрудника"
-                                                    SelectedValueBinding="{Binding Path=GetDepName}" 
-                                                    Width="*" />
+                                                    SelectedValueBinding="{Binding Path=EmployeeDep.DepName}" 
+                                                    Width="*"/>
 
                         </DataGrid.Columns>
                     </DataGrid>

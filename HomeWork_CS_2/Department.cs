@@ -26,10 +26,10 @@ namespace HomeWork_CS_2
         /// Перегружаем метод вывода ToString(), для вывода названия отдела
         /// </summary>
         /// <returns></returns>
-        public override string ToString()
-        {
-            return DepName;
-        }
+        //public override string ToString()
+        //{
+        //    return DepName;
+        //}
 
         /// <summary>
         /// Сравнение отделов (по названию отдела)
