@@ -25,15 +25,19 @@ namespace HomeWork_CS_2
             "Коммерческий отдел",
             "Отдел персонала",
             "Юридический отдел"
-            //new Department("Финанасовый отдел"),
-            //new Department("Отдел маркетинга"),
-            //new Department("Отдел закупок"),
-            //new Department("Коммерческий отдел"),
-            //new Department("Отдел персонала"),
-            //new Department("Юридический отдел"),
         };
 
-        //создаем и заполняем список сотрудников
+        //ObservableCollection<Department> Departments = new ObservableCollection<Department>()
+        //{
+        //    new Department("Финанасовый отдел"),
+        //    new Department("Отдел маркетинга"),
+        //    new Department("Отдел закупок"),
+        //    new Department("Коммерческий отдел"),
+        //    new Department("Отдел персонала"),
+        //    new Department("Юридический отдел"),
+        //};
+
+        ///создаем и заполняем список сотрудников
         ObservableCollection<Employee> Employees = new ObservableCollection<Employee>();
 
         public MainWindow()
@@ -49,16 +53,16 @@ namespace HomeWork_CS_2
         }
 
 
-        private void Red_Click(object sender, RoutedEventArgs e)
+        private void Change_Click(object sender, RoutedEventArgs e)
         {
             dgEmloyeeList.IsReadOnly = !dgEmloyeeList.IsReadOnly;
             if (dgEmloyeeList.IsReadOnly)
             {
-                Red.Content = "Разрешить редактирование";
+                Change.Content = "Разрешить редактирование";
             }
             else
             {
-                Red.Content = "Запретить редактирование";
+                Change.Content = "Запретить редактирование";
             }
         }
 

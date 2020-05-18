@@ -38,7 +38,7 @@ namespace HomeWork_CS_2
         /// <returns></returns>
         public int CompareTo(object obj)
         {
-            return String.Compare(this.DepName, (obj as Department)?.DepName);
+            return string.Compare(this.DepName, (obj as Department)?.DepName);
         }
 
         public Department()
