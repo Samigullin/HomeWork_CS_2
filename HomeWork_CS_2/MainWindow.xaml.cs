@@ -12,7 +12,7 @@ using Microsoft.Win32;
 namespace HomeWork_CS_2
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия  для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -110,6 +110,19 @@ namespace HomeWork_CS_2
                 Departments.Add(tbAddNewDepartment.Text);
                 tbAddNewDepartment.Foreground = Brushes.Gray;
                 tbAddNewDepartment.Text = "Название отдела";
+            }
+        }
+
+        /// <summary>
+        /// Закрытие приложения
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!(MessageBox.Show("Вы уверены, что хотите выйти из приложения?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes))
+            {
+                e.Cancel = true;
             }
         }
 
@@ -243,6 +256,7 @@ namespace HomeWork_CS_2
             }
         }
         #endregion
+
 
     }
 }

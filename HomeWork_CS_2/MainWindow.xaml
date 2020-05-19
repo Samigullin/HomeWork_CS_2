@@ -14,7 +14,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="Картотека" Height="536" Width="600" MinWidth="700" MaxWidth="700" 
-        MinHeight="500" MaxHeight="900" WindowStartupLocation="CenterScreen">
+        MinHeight="500" MaxHeight="900" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
 
     <Window.Resources>
         <local:MyConverter x:Key="Conv"/>
@@ -143,7 +143,7 @@
                                      Width="209" 
                                      GotFocus="tbAddName_GotFocus"
                                      LostFocus="tbAddName_LostFocus" Grid.ColumnSpan="2"/>
-
+                            
                             <TextBox x:Name="tbAddSName" 
                                      Foreground="Gray" 
                                      HorizontalAlignment="Left" 
