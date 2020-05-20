@@ -16,40 +16,20 @@ namespace HomeWork_CS_2
     /// </summary>
     public partial class MainWindow : Window
     {
-        //создаем и заполняем список отделов:
-        ObservableCollection<string> Departments = new ObservableCollection<string>()
-        {
-            "Финанасовый отдел",
-            "Отдел маркетинга",
-            "Отдел закупок",
-            "Коммерческий отдел",
-            "Отдел персонала",
-            "Юридический отдел"
-        };
-
-        //ObservableCollection<Department> Departments = new ObservableCollection<Department>()
-        //{
-        //    new Department("Финанасовый отдел"),
-        //    new Department("Отдел маркетинга"),
-        //    new Department("Отдел закупок"),
-        //    new Department("Коммерческий отдел"),
-        //    new Department("Отдел персонала"),
-        //    new Department("Юридический отдел"),
-        //};
-
-        ///создаем и заполняем список сотрудников
-        ObservableCollection<Employee> Employees = new ObservableCollection<Employee>();
-
+        //попытка разделить представление от модели
+        Presenter p;
         public MainWindow()
         {            
             InitializeComponent();
+            p = new Presenter();
+            p.LoadFromXML("..\\..\\Employee.xml");
 
-            LoadFromXML("..\\..\\Employee.xml");
-            cbAddDepartment.SelectedIndex = 0;
-            //привязываем источники
-            cbAddDepartment.ItemsSource = Departments;
-            dgEmloyeeList.ItemsSource = Employees;                           
-            dataGridComboBox.ItemsSource = Departments;
+            Save.Click += delegate { p.SaveToXML(); };
+            Open.Click += delegate { p.LoadFromXML(); };
+
+            cbAddDepartment.ItemsSource = p.Departments;
+            dgEmloyeeList.ItemsSource = p.Employees;
+            dgComboBox.ItemsSource = p.Departments;
         }
 
 
@@ -66,34 +46,29 @@ namespace HomeWork_CS_2
             }
         }
 
+        /// <summary>
+        /// Нажатие на кнопку добавить
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddEmloyee_Click(object sender, RoutedEventArgs e)
         {
-            //проверяем, чтоб имя и фамилия не были пустыми
-            if (tbAddName.Text == "Имя" || tbAddName.Text == "")
-            {
-                MessageBox.Show("Введите имя сотрудника", "Ошибка ввода", MessageBoxButton.OK);
-            }
-            else if (tbAddSName.Text == "Фамилия" || tbAddName.Text == "")
-            {
-                MessageBox.Show("Введите фамилию сотрудника","Ошибка ввода", MessageBoxButton.OK);
-            }
+            //проверяем, чтоб имя, фамилия и отдел не были пустыми
+            if (tbAddName.Text == "Имя" || tbAddName.Text == "")                MessageBox.Show("Введите имя сотрудника", "Ошибка ввода", MessageBoxButton.OK);            
+            else if (tbAddSName.Text == "Фамилия" || tbAddName.Text == "")      MessageBox.Show("Введите фамилию сотрудника","Ошибка ввода", MessageBoxButton.OK);
+            else if (cbAddDepartment.SelectedIndex == -1)                       MessageBox.Show("Выберите отдел сотрудника", "Ошибка ввода", MessageBoxButton.OK);
             else
             {
                 //добавляем нового сотрудника
-                Employees.Add(new Employee()
-                {
-                    Name = tbAddName.Text,
-                    SName = tbAddSName.Text,
-                    GetDepName = cbAddDepartment.SelectedItem.ToString()
-                });
-
+                p.AddEmployee(tbAddName.Text, tbAddSName.Text, cbAddDepartment.SelectedItem.ToString());
                 MessageBox.Show($"Сотрудник {tbAddName.Text} {tbAddSName.Text} добавлен в {cbAddDepartment.SelectedItem}.");
+
+                //очищаем и засериваем поля ввода
                 tbAddName.Foreground = Brushes.Gray;
                 tbAddSName.Foreground = Brushes.Gray;
-                //очищаем поля ввода
                 tbAddName.Text = "Имя";
                 tbAddSName.Text = "Фамилия";
-                cbAddDepartment.SelectedIndex = 0;
+                cbAddDepartment.SelectedIndex = -1;
             }
         }
 
@@ -107,7 +82,7 @@ namespace HomeWork_CS_2
             else
             {
                 MessageBox.Show($"Отдел {tbAddNewDepartment.Text} добавлен.");
-                Departments.Add(tbAddNewDepartment.Text);
+                p.AddDepartment(tbAddNewDepartment.Text);
                 tbAddNewDepartment.Foreground = Brushes.Gray;
                 tbAddNewDepartment.Text = "Название отдела";
             }
@@ -126,7 +101,7 @@ namespace HomeWork_CS_2
             }
         }
 
-        #region реализация засеривания подсказки в полях ввода 
+        #region реализация засеривания подсказки в полях ввода  TODO: переделать засеривание через триггеры
         private void tbAddName_GotFocus(object sender, RoutedEventArgs e)
         {
             if (tbAddName.Text == "Имя" || tbAddName.Text == "")
@@ -184,79 +159,5 @@ namespace HomeWork_CS_2
             }
         }
         #endregion
-
-        #region сохранение/открытие файла
-
-        /// <summary>
-        /// Сохранение в XML файл
-        /// </summary>
-        /// <param name="fileName"></param>
-        public void SaveToXML(string fileName)
-        {
-            XmlSerializer xmlFormat = new XmlSerializer(typeof(ObservableCollection<Employee>));
-            //Создаем файловый поток(проще говоря создаем файл)
-            try
-            {
-                using (FileStream fStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
-                {
-                    xmlFormat.Serialize(fStream, Employees);
-                    Debug.WriteLine("Data has been saved to file");
-                }
-
-                #region Если захочу сериализовать в JSON:
-                //using (FileStream fStream = new FileStream("..\\..\\Employee.json", FileMode.Create, FileAccess.Write))
-                //{
-                //    JsonSerializer.SerializeAsync(fStream, Employees);
-                //    Debug.WriteLine("Data has been saved to file");
-                //}
-                #endregion
-            }
-            catch { }
-        }
-
-        /// <summary>
-        /// Загрузка из XML файла
-        /// </summary>
-        /// <param name="fileName"></param>
-        public void LoadFromXML(string fileName)
-        {
-            XmlSerializer xmlFormat = new XmlSerializer(typeof(ObservableCollection<Employee>));
-            try
-            {
-                using (FileStream fStream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Read))
-                {
-                    Employees = (ObservableCollection<Employee>)xmlFormat.Deserialize(fStream);
-                    Debug.WriteLine("Data has been read from file");
-                }
-            }
-            catch { }
-        }
-
-        private void Save_Click(object sender, RoutedEventArgs e)
-        {
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "XML файл|*.XML|Все файлы|*.*";
-            if (dialog.ShowDialog() == true)
-            {
-                SaveToXML(dialog.FileName);
-            }
-        }
-
-        private void Open_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "XML файл|*.XML|Все файлы|*.*";
-            if (dialog.ShowDialog() == true)
-            {
-                //database = new Trips();
-                //database.Load(dialog.FileName);
-                //UpdateInfo();
-                LoadFromXML(dialog.FileName);
-                dgEmloyeeList.ItemsSource = Employees;
-            }
-        }
-        #endregion
-
-
     }
 }

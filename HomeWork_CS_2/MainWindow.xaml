@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="12"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="Картотека" Height="536" Width="600" MinWidth="700" MaxWidth="700" 
-        MinHeight="500" MaxHeight="900" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
+        MinHeight="500" MaxHeight="900" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <local:MyConverter x:Key="Conv"/>
@@ -29,8 +29,7 @@
                         <ColumnDefinition Width="15*"/>
                         <ColumnDefinition Width="130*"/>
                         <ColumnDefinition Width="144*"/>
-                        <ColumnDefinition Width="166*"/>
-                        <ColumnDefinition Width="221*"/>
+                        <ColumnDefinition Width="387*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="7"/>
@@ -38,24 +37,24 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <DataGrid x:Name="dgEmloyeeList" 
+                    <DataGrid x:Name="dgEmloyeeList"                              
                               IsReadOnly="True" 
                               Margin="5" 
                               AutoGenerateColumns="false"  
                               Grid.Row="2" 
-                              Grid.ColumnSpan="5">
-                       
+                              Grid.ColumnSpan="4">
+
                         <DataGrid.Columns>
-                           
+
                             <DataGridTextColumn Header="Имя сотрудника" 
-                                                Binding="{Binding Name}" 
+                                                Binding="{Binding Path=Name}" 
                                                 Width="*" />
-                            
+
                             <DataGridTextColumn Header="Фамилия сотрудника" 
                                                 Binding="{Binding SName}" 
                                                 Width="*" />
 
-                            <DataGridComboBoxColumn x:Name="dataGridComboBox" 
+                            <DataGridComboBoxColumn x:Name="dgComboBox" 
                                                     Header="Отдел сотрудника"
                                                     SelectedValueBinding="{Binding Path=EmployeeDep.DepName}" 
                                                     Width="*"/>
@@ -66,8 +65,7 @@
                     <Button  x:Name="Open" 
                              Content="Открыть" 
                              FontSize="12" 
-                             Margin="2"
-                             Click="Open_Click"
+                             Margin="2,3,2,4"
                              Height="22" 
                              VerticalAlignment="Stretch" 
                              Grid.Column="1"
@@ -75,10 +73,9 @@
 
                     <Button  x:Name="Save" 
                              Content="Сохранить как"
-                             FontSize="12" 
-                             Click="Save_Click" 
+                             FontSize="12"                              
                              Height="22"
-                             Margin="2"
+                             Margin="2,3,2,4"
                              VerticalAlignment="Stretch" 
                              Grid.Column="2" Grid.Row="1"/>
 
@@ -89,7 +86,7 @@
                             Click="Change_Click" 
                             Height="22" 
                             VerticalAlignment="Stretch"
-                            Grid.Column="4" Grid.Row="1"/>
+                            Grid.Column="3" Grid.Row="1" Margin="180,3,14,4"/>
                 </Grid>
             </TabItem>
 
@@ -115,7 +112,7 @@
                                 <ColumnDefinition Width="293*"/>
                             </Grid.ColumnDefinitions>
 
-                            <ComboBox x:Name="cbAddDepartment" 
+                            <ComboBox x:Name="cbAddDepartment"                                        
                                       HorizontalAlignment="Left" 
                                       Height="26" 
                                       Width="150"
@@ -143,7 +140,7 @@
                                      Width="209" 
                                      GotFocus="tbAddName_GotFocus"
                                      LostFocus="tbAddName_LostFocus" Grid.ColumnSpan="2"/>
-                            
+
                             <TextBox x:Name="tbAddSName" 
                                      Foreground="Gray" 
                                      HorizontalAlignment="Left" 
@@ -163,7 +160,10 @@
                                     Click="btnAddEmloyee_Click"
                                     Height="25"
                                     VerticalAlignment="Bottom" 
-                                    ToolTip="Добавить нового сотрудника" Grid.ColumnSpan="2" Grid.Row="1"/>
+                                    ToolTip="Добавить нового сотрудника" 
+                                    Grid.ColumnSpan="2" Grid.Row="1">
+
+                            </Button>
                         </Grid>
                     </GroupBox>
 
