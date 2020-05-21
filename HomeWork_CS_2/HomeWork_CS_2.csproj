@@ -106,7 +106,7 @@
   <ItemGroup>
     <Compile Include="MyConverter.cs" />
     <Compile Include="ObservableList.cs" />
-    <Compile Include="Presenter.cs" />
+    <Compile Include="Database.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,22 +12,60 @@ namespace HomeWork_CS_2
     /// <summary>
     /// Класс сотрудника
     /// </summary>
-    public class Employee 
+    public class Employee : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        string name;
+        string sName;
+        Department employeeDep;
+
         /// <summary>
         /// Имя сотрудника
         /// </summary>
-        public string Name { get; set; }
+        public string Name 
+        { 
+            get 
+            {
+                return name;
+            } 
+            set
+            {
+                name = value;                
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
+            }
+        }
 
         /// <summary>
         /// Фамилия сотрудника
         /// </summary>
-        public string SName { get; set; }
+        public string SName
+        {
+            get
+            {
+                return sName;
+            }
+            set
+            {
+                sName = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SName)));
+            }
+        }
 
         /// <summary>
         /// Отдел сотрудника
         /// </summary>
-        public Department EmployeeDep { get; set; }
+        public Department EmployeeDep
+        {
+            get
+            {
+                return employeeDep;
+            }
+            set
+            {
+                employeeDep = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.EmployeeDep.DepName)));
+            }
+        }
 
         /// <summary>
         /// Получение названия отдела
@@ -36,5 +76,6 @@ namespace HomeWork_CS_2
             set { EmployeeDep = new Department(value); } 
         }
 
+        
     }
 }

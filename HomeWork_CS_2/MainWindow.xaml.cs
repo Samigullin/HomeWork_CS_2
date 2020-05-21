@@ -17,19 +17,23 @@ namespace HomeWork_CS_2
     public partial class MainWindow : Window
     {
         //попытка разделить представление от модели
-        Presenter p;
+        Database db;
         public MainWindow()
         {            
             InitializeComponent();
-            p = new Presenter();
-            p.LoadFromXML("..\\..\\Employee.xml");
 
-            Save.Click += delegate { p.SaveToXML(); };
-            Open.Click += delegate { p.LoadFromXML(); };
+            db = new Database();
+            this.DataContext = db;
 
-            cbAddDepartment.ItemsSource = p.Departments;
-            dgEmloyeeList.ItemsSource = p.Employees;
-            dgComboBox.ItemsSource = p.Departments;
+            db.LoadFromXML("..\\..\\Employee.xml");
+
+            Save.Click += delegate { db.SaveToXML(); };
+            Open.Click += delegate { db.LoadFromXML();  };
+
+            //cbAddDepartment.ItemsSource = db.Departments;
+            //dgEmloyeeList.ItemsSource = db.Employees;
+            
+            dgComboBox.ItemsSource = db.Departments;
         }
 
 
@@ -60,7 +64,7 @@ namespace HomeWork_CS_2
             else
             {
                 //добавляем нового сотрудника
-                p.AddEmployee(tbAddName.Text, tbAddSName.Text, cbAddDepartment.SelectedItem.ToString());
+                db.AddEmployee(tbAddName.Text, tbAddSName.Text, cbAddDepartment.SelectedItem.ToString());
                 MessageBox.Show($"Сотрудник {tbAddName.Text} {tbAddSName.Text} добавлен в {cbAddDepartment.SelectedItem}.");
 
                 //очищаем и засериваем поля ввода
@@ -82,7 +86,7 @@ namespace HomeWork_CS_2
             else
             {
                 MessageBox.Show($"Отдел {tbAddNewDepartment.Text} добавлен.");
-                p.AddDepartment(tbAddNewDepartment.Text);
+                db.AddDepartment(tbAddNewDepartment.Text);
                 tbAddNewDepartment.Foreground = Brushes.Gray;
                 tbAddNewDepartment.Text = "Название отдела";
             }

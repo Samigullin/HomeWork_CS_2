@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -11,7 +12,7 @@ using System.Xml.Serialization;
 
 namespace HomeWork_CS_2
 { 
-    class Presenter
+    class Database : INotifyPropertyChanged
     {
         //создаем и заполняем список отделов:
         ObservableCollection<string> departments = new ObservableCollection<string>()
@@ -26,13 +27,15 @@ namespace HomeWork_CS_2
 
         ///создаем и заполняем список сотрудников
         ObservableCollection<Employee> employees = new ObservableCollection<Employee>();
-        public ObservableCollection<Employee> Employees { get { return employees; } set { employees = value; } }
-        public ObservableCollection<string> Departments { get { return departments; } set{ departments = value; } }
+        public ObservableCollection<Employee> Employees { get { return employees; } set { employees = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Employees))); } }
+        public ObservableCollection<string> Departments { get { return departments; } set{ departments = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Departments))); } }
 
-        public Presenter()
+        public Database()
         { 
 
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Сохранение в XML файл
