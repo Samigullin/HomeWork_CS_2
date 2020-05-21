@@ -14,6 +14,8 @@ namespace HomeWork_CS_2
 { 
     class Database : INotifyPropertyChanged
     {
+        ConnectDB sqlDB = new ConnectDB();
+
         //создаем и заполняем список отделов:
         ObservableCollection<string> departments = new ObservableCollection<string>()
         {
@@ -118,6 +120,23 @@ namespace HomeWork_CS_2
         public void AddDepartment(string _depName)
         {
             Departments.Add(_depName);
+        }
+
+        /// <summary>
+        /// Сохранение сотрудников в SQL DB
+        /// </summary>
+        /// <param name="_needToTruncate">Необходимость предварительной очистки базы</param>
+        public void SaveToDB(bool _needToTruncate)
+        {
+            sqlDB.Insert(Employees, _needToTruncate);
+        }
+
+        /// <summary>
+        /// Чтение сотрудников из SQL DB
+        /// </summary>
+        public void LoadFromDB()
+        {
+
         }
     }
 }

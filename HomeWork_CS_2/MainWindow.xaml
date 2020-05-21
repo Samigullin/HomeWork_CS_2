@@ -16,76 +16,77 @@
         Title="Картотека" Height="536" Width="600" MinWidth="700" MaxWidth="700" 
         MinHeight="500" MaxHeight="900" WindowStartupLocation="CenterScreen"        >
 
-    <Window.Resources>
-        <!--<local:MyConverter x:Key="Conv"/>-->
-    </Window.Resources>
+  <Window.Resources>
+    <!--<local:MyConverter x:Key="Conv"/>-->
+  </Window.Resources>
 
-    <Grid>
+  <Grid>
 
-        <TabControl Margin="5,10,5,0">
-            <TabItem Header="Данные">
-                <Grid Background="#FFE5E5E5" Margin="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="15"/>
-                        <ColumnDefinition Width="145"/>
-                        <ColumnDefinition Width="145"/>
-                        <ColumnDefinition Width="387*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="3"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+    <TabControl Margin="5,10,5,0">
+      <TabItem Header="Данные">
+        <Grid Background="#FFE5E5E5" Margin="0">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="145"/>
+            <ColumnDefinition Width="145"/>
+            <ColumnDefinition Width="145"/>
+            <ColumnDefinition Width="219*"/>
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+          </Grid.RowDefinitions>
 
-                    <DataGrid x:Name="dgEmloyeeList"  
+          <DataGrid x:Name="dgEmloyeeList"  
                               ItemsSource="{Binding Path=Employees}"
                               CanUserAddRows="False"
                               IsReadOnly="True" 
                               Margin="5" 
                               AutoGenerateColumns="False"  
                               Grid.Row="3" 
-                              Grid.ColumnSpan="4" Grid.RowSpan="1">
+                              Grid.ColumnSpan="5" Grid.RowSpan="1">
 
-                        <DataGrid.Columns>
+            <DataGrid.Columns>
 
-                            <DataGridTextColumn Header="Имя сотрудника"                                                 
+              <DataGridTextColumn Header="Имя сотрудника"                                                 
                                                 Binding="{Binding Name}" 
                                                 Width="*" />
 
-                            <DataGridTextColumn Header="Фамилия сотрудника" 
+              <DataGridTextColumn Header="Фамилия сотрудника" 
                                                 Binding="{Binding SName}" 
                                                 Width="*" />
 
-                            <DataGridComboBoxColumn x:Name="dgComboBox"                                                     
+              <DataGridComboBoxColumn x:Name="dgComboBox"                                                     
                                                     SelectedValueBinding="{Binding Path=EmployeeDep.DepName}"
                                                     Header="Отдел сотрудника"                                                    
                                                     Width="*">
 
-                            </DataGridComboBoxColumn>
+              </DataGridComboBoxColumn>
 
 
-                        </DataGrid.Columns>
-                    </DataGrid>
+            </DataGrid.Columns>
+          </DataGrid>
 
-                    <Button  x:Name="Open" 
+          <Button  x:Name="Open" 
                              Content="Открыть файл" 
                              FontSize="12" 
-                             Margin="2,3,2,4"
+                             Margin="2,3,2,5"
                              Height="22" 
                              VerticalAlignment="Stretch" 
                              Grid.Column="1"
                              Grid.Row="1"/>
 
-                    <Button  x:Name="Save" 
+          <Button  x:Name="Save" 
                              Content="Сохранить в файл"
                              FontSize="12"                              
                              Height="22"
-                             Margin="2,3,2,4"
+                             Margin="2,3,2,5"
                              VerticalAlignment="Stretch" 
                              Grid.Column="2" Grid.Row="1"/>
 
-                    <Button x:Name="Change"
+          <Button x:Name="Change"
                             Content="Резрешить редактирование"
                             FontSize="12"
                             Width="190" 
@@ -93,51 +94,60 @@
                             Height="22" 
                             HorizontalAlignment="Right"
                             VerticalAlignment="Stretch"
-                            Grid.Column="3" Grid.Row="2"/>
+                            Grid.Column="4" Grid.Row="2" Margin="0,4"/>
 
-                    <Button  x:Name="OpenFromDB" 
+          <Button  x:Name="OpenFromDB" 
                              Content="Открыть из БД" 
                              FontSize="12" 
-                             Margin="2,3,2,4"
+                             Margin="2,3,2,5"
                              Height="22" 
                              VerticalAlignment="Stretch" 
                              Grid.Column="1"
                              Grid.Row="2"/>
 
-                    <Button  x:Name="SaveToDB" 
+          <Button  x:Name="SaveToDB" 
                              Content="Сохранить в БД" 
                              FontSize="12" 
-                             Margin="2,3,2,4"
+                             Margin="2,3,2,5"
                              Height="22" 
                              VerticalAlignment="Stretch" 
                              Grid.Column="2"
                              Grid.Row="2"/>
-                </Grid>
-            </TabItem>
 
-            <TabItem Header="Добавление">
-                <Grid Background="#FFE5E5E5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="193"/>
-                        <RowDefinition Height="277"/>
-                    </Grid.RowDefinitions>
+          <Button  x:Name="AddToDB"
+                            Content="Добавить к БД"
+                            FontSize="12"
+                            Margin="2,3,2,5"
+                            Height="22"
+                            VerticalAlignment="Stretch"
+                            Grid.Column="3"
+                            Grid.Row="2"/>
+        </Grid>
+      </TabItem>
 
-                    <GroupBox Header="Добавление сотрудника"
+      <TabItem Header="Добавление">
+        <Grid Background="#FFE5E5E5">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="193"/>
+            <RowDefinition Height="277"/>
+          </Grid.RowDefinitions>
+
+          <GroupBox Header="Добавление сотрудника"
                               HorizontalAlignment="Stretch" 
                               Height="192" >
 
-                        <Grid >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="15*"/>
-                                <RowDefinition Height="13*"/>
-                            </Grid.RowDefinitions>
+            <Grid >
+              <Grid.RowDefinitions>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="13*"/>
+              </Grid.RowDefinitions>
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="36*"/>
-                                <ColumnDefinition Width="293*"/>
-                            </Grid.ColumnDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="36*"/>
+                <ColumnDefinition Width="293*"/>
+              </Grid.ColumnDefinitions>
 
-                            <ComboBox x:Name="cbAddDepartment"    
+              <ComboBox x:Name="cbAddDepartment"    
                                       ItemsSource="{Binding Departments}"
                                       HorizontalAlignment="Left" 
                                       Height="26" 
@@ -145,9 +155,9 @@
                                       VerticalAlignment="Top"
                                       ToolTip="Отдел нового сотрудника" 
                                       Grid.Column="1" Grid.Row="1" >
-                            </ComboBox>
+              </ComboBox>
 
-                            <Label Content="Отдел:" 
+              <Label Content="Отдел:" 
                                    HorizontalAlignment="Left" 
                                    Margin="10,3,0,0"
                                    VerticalAlignment="Top"
@@ -155,7 +165,7 @@
                                    Width="48" 
                                    Grid.Row="1"/>
 
-                            <TextBox x:Name="tbAddName"
+              <TextBox x:Name="tbAddName"
                                      Foreground="Gray" 
                                      HorizontalAlignment="Left"
                                      Height="25" 
@@ -167,7 +177,7 @@
                                      GotFocus="tbAddName_GotFocus"
                                      LostFocus="tbAddName_LostFocus" Grid.ColumnSpan="2"/>
 
-                            <TextBox x:Name="tbAddSName" 
+              <TextBox x:Name="tbAddSName" 
                                      Foreground="Gray" 
                                      HorizontalAlignment="Left" 
                                      Height="25" 
@@ -179,7 +189,7 @@
                                      GotFocus="tbAddSName_GotFocus" 
                                      LostFocus="tbAddSName_LostFocus" Grid.ColumnSpan="2"/>
 
-                            <Button x:Name="btnAddEmployee" 
+              <Button x:Name="btnAddEmployee" 
                                     Content="Добавить" 
                                     HorizontalAlignment="Left" 
                                     Width="103"
@@ -189,17 +199,17 @@
                                     ToolTip="Добавить нового сотрудника" 
                                     Grid.ColumnSpan="2" Grid.Row="1">
 
-                            </Button>
-                        </Grid>
-                    </GroupBox>
+              </Button>
+            </Grid>
+          </GroupBox>
 
-                    <GroupBox Header="Добавление отдела" 
+          <GroupBox Header="Добавление отдела" 
                               HorizontalAlignment="Stretch"  
                               Height="120" 
                               VerticalAlignment="Top" 
                               Grid.Row="1">
-                        <Grid>
-                            <TextBox x:Name="tbAddNewDepartment" 
+            <Grid>
+              <TextBox x:Name="tbAddNewDepartment" 
                                      Foreground="Gray" 
                                      HorizontalAlignment="Left" 
                                      Height="25" 
@@ -210,18 +220,18 @@
                                      LostFocus="tbAddNewDepartment_LostFocus" 
                                      GotFocus="tbAddNewDepartment_GotFocus"/>
 
-                            <Button x:Name="btnAddDepartment" Content="Добавить" 
+              <Button x:Name="btnAddDepartment" Content="Добавить" 
                                     HorizontalAlignment="Left" 
                                     Width="105" 
                                     Click="btnAddDepartment_Click" 
                                     Height="25" 
                                     VerticalAlignment="Bottom" 
                                     ToolTip="Добавить новый отдел"/>
-                        </Grid>
-                    </GroupBox>
-                </Grid>
-            </TabItem>
+            </Grid>
+          </GroupBox>
+        </Grid>
+      </TabItem>
 
-        </TabControl>
-    </Grid>
+    </TabControl>
+  </Grid>
 </Window>
