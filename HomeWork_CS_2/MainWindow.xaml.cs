@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using System.Windows.Media;
-using System.Xml.Serialization;
-using System.Diagnostics;
-using Microsoft.Win32;
+
 
 
 namespace HomeWork_CS_2
@@ -25,8 +19,6 @@ namespace HomeWork_CS_2
             db = new Database();
             this.DataContext = db;
 
-            //db.LoadFromXML("..\\..\\Employee.xml");
-
             Save.Click += delegate { db.SaveToXML(); };
             Open.Click += delegate { db.LoadFromXML();  };
             SaveToDB.Click += delegate { db.SaveToDB(true); };
@@ -39,17 +31,21 @@ namespace HomeWork_CS_2
             dgComboBox.ItemsSource = db.Departments;
         }
 
-
+        /// <summary>
+        /// Разблокирование возможности изменений таблицы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Change_Click(object sender, RoutedEventArgs e)
         {
             dgEmloyeeList.IsReadOnly = !dgEmloyeeList.IsReadOnly;
             if (dgEmloyeeList.IsReadOnly)
             {
-                Change.Content = "Разрешить редактирование";
+                Change.Content = "Разрешить редактирование таблицы";
             }
             else
             {
-                Change.Content = "Запретить редактирование";
+                Change.Content = "Запретить редактирование таблицы";
             }
         }
 
@@ -79,6 +75,11 @@ namespace HomeWork_CS_2
             }
         }
 
+        /// <summary>
+        /// Нажание на кнопку добавления отдела
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddDepartment_Click(object sender, RoutedEventArgs e)
         {
             //проверяем, чтоб отдел не был пустой
