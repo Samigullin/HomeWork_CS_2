@@ -25,12 +25,13 @@ namespace HomeWork_CS_2
             db = new Database();
             this.DataContext = db;
 
-            db.LoadFromXML("..\\..\\Employee.xml");
+            //db.LoadFromXML("..\\..\\Employee.xml");
 
             Save.Click += delegate { db.SaveToXML(); };
             Open.Click += delegate { db.LoadFromXML();  };
             SaveToDB.Click += delegate { db.SaveToDB(true); };
             AddToDB.Click += delegate { db.SaveToDB(false); };
+            OpenFromDB.Click += delegate { db.LoadFromDB(); };
 
             //cbAddDepartment.ItemsSource = db.Departments;
             //dgEmloyeeList.ItemsSource = db.Employees;

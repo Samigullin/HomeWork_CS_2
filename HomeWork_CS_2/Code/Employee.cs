@@ -19,6 +19,17 @@ namespace HomeWork_CS_2
         string sName;
         Department employeeDep;
 
+        public Employee()
+        {
+
+        }
+        public Employee(string _name, string _sName, string _dep)
+        {
+            Name = _name;
+            SName = _sName;
+            EmployeeDep = new Department(_dep);
+        }
+
         /// <summary>
         /// Имя сотрудника
         /// </summary>

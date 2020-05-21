@@ -1,13 +1,8 @@
 ﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace HomeWork_CS_2
@@ -56,7 +51,7 @@ namespace HomeWork_CS_2
                     using (FileStream fStream = new FileStream(dialog.FileName, FileMode.Create, FileAccess.Write))
                     {
                         xmlFormat.Serialize(fStream, Employees);
-                        Debug.WriteLine("Data has been saved to file");
+                        Debug.WriteLine("Данные сохранены в файл");
                     }
                 }
             }
@@ -90,7 +85,7 @@ namespace HomeWork_CS_2
                 using (FileStream fStream = new FileStream(_fileName, FileMode.OpenOrCreate, FileAccess.Read))
                 {
                     Employees = (ObservableCollection<Employee>)xmlFormat.Deserialize(fStream);
-                    Debug.WriteLine("Data has been read from file");
+                    Debug.WriteLine("Данные прочитаны из файла");
                 }
             }
             catch { }
@@ -136,7 +131,7 @@ namespace HomeWork_CS_2
         /// </summary>
         public void LoadFromDB()
         {
-
+            sqlDB.Read(Employees, Departments);
         }
     }
 }

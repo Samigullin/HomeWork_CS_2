@@ -13,8 +13,8 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Картотека" Height="536" Width="600" MinWidth="700" MaxWidth="700" 
-        MinHeight="500" MaxHeight="900" WindowStartupLocation="CenterScreen"        >
+        Title="Картотека" Height="700" Width="700" MinWidth="700" 
+        MinHeight="700"  WindowStartupLocation="CenterScreen"        >
 
   <Window.Resources>
     <!--<local:MyConverter x:Key="Conv"/>-->
@@ -143,8 +143,8 @@
               </Grid.RowDefinitions>
 
               <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="36*"/>
-                <ColumnDefinition Width="293*"/>
+                <ColumnDefinition Width="72"/>
+                <ColumnDefinition/>
               </Grid.ColumnDefinitions>
 
               <ComboBox x:Name="cbAddDepartment"    
